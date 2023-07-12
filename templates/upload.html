@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+      {% endblock %}
+      
+{% block content %}
+{% include 'messages.html' %}
+
+    <div id="loading-spinner" class="hidden">
+        <div class="loading-container">
+	
+            <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+                 <circle cx="170" cy="170" r="160" stroke="#1B6B93"/>
+                 <circle cx="170" cy="170" r="135" stroke="#4FC0D0"/>
+                 <circle cx="170" cy="170" r="110" stroke="#1B6B93"/>
+                 <circle cx="170" cy="170" r="85" stroke="#4FC0D0"/>
+            </svg>
+            
+        </div>
+    </div>
+    
+    <div class="upload-area">
+        
+        <p class="upload-header">upload your file:</p>
+        <form id="upload-form" action="{{ url_for('result') }}" method="POST" enctype="multipart/form-data">
+      <div class="drag-area">
+          <!-- <div class="icon"><i class="fas fa-images"></i></div> -->
+          <header>Drag & Drop to Upload File</header>
+          <span>OR</span>
+          <button>Browse File</button>
+         <p class="support">supports: <span>jpeg</span>,<span>jpg</span>,<span>png</span></p>
+         
+        <input type="file" name="file" id="file-input" hidden>
+       
+      </div>
+        
+        <button type="submit" id="upload-button" class="upload-btn">upload file </button>
+       </div>
+    </form>
+{% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

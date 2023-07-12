@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+{% include 'messages.html' %}
+
+<div class="center">
+<div class="form-modal">
+    
+  <div class="form-toggle">
+      <button id="login-toggle" onclick="toggleLogin()">log in</button>
+      <button id="signup-toggle" onclick="toggleSignup()">sign up</button>
+  </div>
+
+  <div id="login-form">
+    <form method="POST">
+        {{ form2.hidden_tag() }}
+        {{ form2.username(placeholder="Enter username") }}
+        {{ form2.password(placeholder="Enter password") }}
+        {{ form2.submit_log(class="btn login") }}
+          
+          <p><a href="javascript:void(0)">Forgotten account</a></p>
+         
+      </form>
+  </div>
+
+  <div id="signup-form">
+    <form action="{{ url_for('index') }}" method="POST">
+        {{ form1.hidden_tag() }}
+        {{ form1.email(placeholder="Enter your email") }}
+        {{ form1.username(placeholder="Choose username") }}
+        {{ form1.password(placeholder="Create password") }}
+        {{ form1.cpassword(placeholder="Confirm Password") }}
+        {{ form1.submit_reg(class="btn signup") }}
+
+        
+          <p style="text-decoration: none;">Clicking <strong>create account</strong> means that you are agree to our <a href="javascript:void(0)">terms of services</a>.</p>
+      </form>
+  </div>
+
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+ function toggleSignup(){
+   document.getElementById("login-toggle").style.backgroundColor="#fff";
+    document.getElementById("login-toggle").style.color="#222";
+    document.getElementById("signup-toggle").style.backgroundColor="#4FC0D0";
+    document.getElementById("signup-toggle").style.color="#fff";
+    document.getElementById("login-form").style.display="none";
+    document.getElementById("signup-form").style.display="block";
+}
+
+function toggleLogin(){
+    document.getElementById("login-toggle").style.backgroundColor="#4FC0D0";
+    document.getElementById("login-toggle").style.color="#fff";
+    document.getElementById("signup-toggle").style.backgroundColor="#fff";
+    document.getElementById("signup-toggle").style.color="#222";
+    document.getElementById("signup-form").style.display="none";
+    document.getElementById("login-form").style.display="block";
+}
+
+</script>
+{% endblock %}
